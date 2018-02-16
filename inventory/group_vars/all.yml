@@ -1,0 +1,109 @@
+# Role github is: https://github.com/Poniverse/ansible-logrotate
+
+logrotate_scripts:
+  - name: apt
+    path: |
+      /var/log/apt/term.log
+      /var/log/apt/history.log
+    options:
+      - rotate 12
+      - monthly
+      - missingok
+      - compress
+      - notifempty
+
+  - name: dpkg
+    path: |
+      /var/log/dpkg.log
+      /var/log/alternatives.log
+    options:
+      - monthly
+      - rotate 12
+      - missingok
+      - compress
+      - delaycompress
+      - notifempty
+      - create 644 root root
+
+  - name: rsyslog-syslog
+    path: /var/log/syslog
+    options:
+      - rotate 7
+      - daily
+      - missingok
+      - notifempty
+      - delaycompress
+      - compress
+    scripts:
+      postrotate: service rsyslog rotate > /dev/null
+
+  # This overwrites the default rsyslog config file, which does not rotate syslog.
+  - name: rsyslog
+    path: |
+      /var/log/mail.info
+      /var/log/mail.warn
+      /var/log/mail.err
+      /var/log/mail.log
+      /var/log/daemon.log
+      /var/log/kern.log
+      /var/log/auth.log
+      /var/log/user.log
+      /var/log/lpr.log
+      /var/log/cron.log
+      /var/log/debug
+      /var/log/messages
+    options:
+      - rotate 4
+      - weekly
+      - missingok
+      - notifempty
+      - compress
+      - delaycompress
+      - sharedscripts
+    scripts:
+      postrotate: service rsyslog rotate > /dev/null
+
+  - name: ufw
+    path: /var/log/ufw.log
+    options:
+      - rotate 4
+      - weekly
+      - missingok
+      - notifempty
+      - compress
+      - delaycompress
+      - sharedscripts
+    scripts:
+      postrotate: service rsyslog rotate >/dev/null 2>&1 || true
+
+  - name: unattended-upgrades
+    path: |
+      /var/log/unattended-upgrades/unattended-upgrades.log
+      /var/log/unattended-upgrades/unattended-upgrades-dpkg.log
+      /var/log/unattended-upgrades/unattended-upgrades-shutdown.log
+    options:
+      - rotate 6
+      - monthly
+      - missingok
+      - compress
+      - notifempty
+
+  - name: fail2ban
+    path: /var/log/fail2ban.log
+    options:
+      - rotate 4
+      - weekly
+      - missingok
+      - compress
+      - delaycompress
+      - create 640 root adm
+    scripts:
+      postrotate: fail2ban-client set logtarget /var/log/fail2ban.log >/dev/null
+
+# Blank template, just add water
+#  - name: !!!
+#    path: !!!
+#    options:
+#      - !!!
+#    scripts:
+#      postrotate: !!!

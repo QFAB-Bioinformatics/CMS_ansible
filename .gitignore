@@ -1,0 +1,6 @@
+.vagrant
+.idea
+*.retry
+secret/
+*.swp
+vendor_roles/

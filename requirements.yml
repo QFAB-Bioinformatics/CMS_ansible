@@ -1,0 +1,27 @@
+- src: https://github.com/debops/ansible-core
+  version: v0.2.7
+  name: debops.core
+
+- src: https://github.com/debops/ansible-ferm
+  version: v0.3.0
+  name: debops.ferm
+
+- src: https://github.com/debops/ansible-tcpwrappers
+  version: v0.2.2
+  name: debops.tcpwrappers
+
+- src: https://github.com/debops/ansible-secret
+  version: v0.3.1
+  name: debops.secret
+
+- src: https://github.com/debops/ansible-mariadb_server
+  version: v0.2.5
+  name: debops.mariadb_server
+
+- src: https://github.com/debops/ansible-mariadb
+  version: v0.2.3
+  name: debops.mariadb
+
+- src: https://github.com/Poniverse/ansible-logrotate
+  version: 18d602d3817bfd464e38207def82d2eb6c758bb7
+  name: Poniverse.logrotate

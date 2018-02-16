@@ -1,0 +1,2 @@
+[cms]
+cms_test ansible_ssh_host=10.0.0.1 become_user=ubuntu
